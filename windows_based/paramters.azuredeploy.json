@@ -19,7 +19,7 @@
       "type": "string",
       "minLength": 1,
       "metadata": {
-        "description": "Globally unique DNS Name for the Public IP used to access the Virtual Machine."
+        "description": "Name for the Virtual Machine."
       }
     },
     "windows_OS_Version": {
