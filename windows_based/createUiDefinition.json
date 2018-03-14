@@ -1,0 +1,191 @@
+﻿{
+    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json",
+    "handler": "Microsoft.Compute.MultiVm",
+    "version": "0.1.2-preview",
+  "parameters": {
+    "basics": [
+      {
+        "name": "vm_Name",
+        "type": "Microsoft.Common.TextBox",
+        "label": "Virtual Machine name",
+        "toolTip": "Chose an unique name which identifys your virtual machine.",
+        "constraints": {
+          "required": true,
+          "regex": "^[a-z][a-zA-Z0-9]{1,14}[a-zA-Z0-9]$",
+          "validationMessage": "The value should not be empty has less then 16 characters. The VM name must contain only letters and numbers."
+        },
+        "visible": true
+      },
+      {
+        "name": "vm_Credentials",
+        "type": "Microsoft.Common.Section",
+        "label": "Default VM credentials",
+        "elements": [
+          {
+            "name": "user_Name",
+            "type": "Microsoft.Common.TextBox",
+            "label": "User name",
+            "toolTip": "This user name can be used to connect via Remote Desktop to your virtual machine.",
+            "constraints": {
+              "required": true,
+              "validationMessage": "The value should not be empty."
+            },
+            "visible": true
+          },
+          {
+            "name": "password",
+            "type": "Microsoft.Common.PasswordBox",
+            "label": {
+              "password": "Password",
+              "confirmPassword": "Confirm password"
+            },
+            "toolTip": "Passwords must be at least 8 characters long, contain a letter, a number, and a special character",
+            "constraints": {
+              "required": true,
+              "regex": "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$",
+              "validationMessage": "Passwords must be at least 8 characters long, contain a letter, a number, and a special character"
+            },
+            "options": {
+              "hideConfirmation": false
+            },
+            "visible": true
+          }
+        ],
+        "visible": true
+      },
+      {
+        "name": "windows_OS_Version",
+        "type": "Microsoft.Common.DropDown",
+        "label": "VM OS version",
+        "defaultValue": "2016-Datacenter",
+        "toolTip": "Choose an OS version. To save costs, chose Windows Server 2016 Core [Smalldisk]. Windows Server 2016 Core [smalldisk] is console only and has just 30GB disk size.",
+        "constraints": {
+          "allowedValues": [
+            {
+              "label": "Windows Server 2016 Datacenter",
+              "value": "2016-Datacenter"
+            },
+            {
+              "label": "Windows Server 2016 Core [Smalldisk]",
+              "value": "2016-Datacenter-Server-Core-smalldisk"
+            }
+          ]
+        },
+        "visible": true
+      }
+    ],
+    "steps": [
+
+      {
+        "name": "vm_Size_Selector",
+        "label": "VM Size",
+        "subLabel": {
+          "preValidation": "Chose a VM Size. We strongly recommend to SSD.",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "VM Size",
+        "elements": [
+          {
+            "name": "vm_Size",
+            "type": "Microsoft.Compute.SizeSelector",
+            "label": "VM Size",
+            "toolTip": "Select a size for your VM",
+            "recommendedSizes": [
+              "Standard_B2s",
+              "Standard_DS2_v2",
+              "Standard_B2ms",
+              "Standard_D1"
+            ],
+            "constraints": {
+              "allowedSizes": [],
+              "excludedSizes": []
+            },
+            "osPlatform": "Windows",
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "[basics('windows_OS_Version')]"
+            },
+            "visible": true
+          }
+        ]
+      },
+
+      {
+        "name": "vsts_Agent_Config",
+        "label": "VSTS Agent settings",
+        "subLabel": {
+          "preValidation": "Configure your VSTS build agent",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "VSTS Agent settings",
+        "elements": [
+          {
+            "name": "server_URL",
+            "type": "Microsoft.Common.TextBox",
+            "label": "VSTS Account Name",
+            "toolTip": "You can find your account name in your VSTS URL: https://{your_account_Name}.visualstudio.com",
+            "constraints": {
+              "required": true,
+              "validationMessage": "The value should not be empty."
+            },
+            "visible": true
+          },
+          {
+            "name": "agent_Pool_Name",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Agent Pool",
+            "defaultValue": "Default",
+            "toolTip": "Specify the agentpool where your agent will be registered.",
+            "constraints": {
+              "required": true,
+              "validationMessage": "The value should not be empty."
+            },
+            "visible": true
+          },
+          {
+            "name": "agent_Name",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Agent name",
+            "defaultValue": "[basics('vm_Name')]",
+            "toolTip": "Specify a name for your private build agent. Agent names should be unique within a agent pool",
+            "constraints": {
+              "required": true,
+              "validationMessage": "The value should not be empty."
+            },
+            "visible": true
+          },
+          {
+            "name": "pat_Token",
+            "type": "Microsoft.Common.PasswordBox",
+            "label": {
+              "password": "Personal Acces Token",
+              "confirmPassword": "Confirm Personal Acces Token"
+            },
+            "toolTip": "Enter the Personal Acces Token which would be used to authenticate against Visual Studio Teamservices account to download and configure agent. [How to generate a PAT](https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate)",
+            "constraints": {
+              "required": true,
+              "validationMessage": "The value should not be empty."
+            },
+            "options": {
+              "hideConfirmation": false
+            },
+            "visible": true
+          }
+        ]
+      }
+    ],
+
+            "outputs": {
+              "admin_Username": "[basics('vm_Credentials').user_Name]",
+              "admin_Password": "[basics('vm_Credentials').password]",
+              "vm_name": "[basics('vm_Name')]",
+              "windows_OS_Version": "[basics('windows_OS_Version')]",
+              "vm_Size": "[basics('vm_Size')]",
+              "vsts_server_url": "[steps('vsts_Agent_Config').server_URL]",
+              "agent_pool": "[steps('vsts_Agent_Config').agent_Pool_Name]",
+              "agent_name": "[steps('vsts_Agent_Config').agent_Name]",
+              "pat_token": "[steps('vsts_Agent_Config').pat_Token]"
+            }
+          }
+      }
