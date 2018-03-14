@@ -1,6 +1,6 @@
 # vsts-privatebuildagent-azure
 
-[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://deploy.azure.com/?repository=https://github.com/whiteducksoftware/vsts-privatebuildagent-azure?ptmpl=https://cdn.rawgit.com/whiteducksoftware/vsts-privatebuildagent-azure/0218374ae600d80d645a94eb69ce6008e7a1c737/windows_based/mainTemplate.json)
 
 ## Motivation
 We had some problems with using Hosted VSTS Agents. More specifically, we had long building times and the free 240 build minutes where not enough anymore. Thats we started to do research about good work arounds. Ultimately, we have come to private agents with whom we have recently had very good experiences.
