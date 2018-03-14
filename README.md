@@ -28,7 +28,7 @@ Currently we offer:
 ## Installation
 You can use the [Deploy-AzureResourceGroup](..\windows_based\Deploy-AzureResourceGroup.ps1) to deploy our solution into Azure.
 
-Or you can use our Azure Marketplace offer and configure your vsts agent via a user interface.
+Or you can use our Azure Marketplace offer (comming soon) and configure your vsts agent via a user interface.
 
 
 ***
