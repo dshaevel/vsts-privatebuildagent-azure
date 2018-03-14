@@ -26,7 +26,7 @@ Currently we offer:
  - A windows based version to build and release .NET Core and Node.js projects
 
 ## Installation
-You can use the [Deploy-AzureResourceGroup](..\windows_based\Deploy-AzureResourceGroup.ps1) to deploy our solution into Azure.
+You can use the [Deploy-AzureResourceGroup](/windows_based/Deploy-AzureResourceGroup.ps1) to deploy our solution into Azure.
 
 Or you can use our Azure Marketplace offer (comming soon) and configure your vsts agent via a user interface.
 
