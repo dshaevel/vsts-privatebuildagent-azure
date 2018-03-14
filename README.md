@@ -1,5 +1,7 @@
 # vsts-privatebuildagent-azure
 
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+
 ## Motivation
 We had some problems with using Hosted VSTS Agents. More specifically, we had long building times and the free 240 build minutes where not enough anymore. Thats we started to do research about good work arounds. Ultimately, we have come to private agents with whom we have recently had very good experiences.
 
@@ -7,7 +9,7 @@ Now we would like to **share** our insights with you.
 
  
 ## Screenshots
-Include logo/demo screenshot etc.
+comming soon
 
 ## Tech/framework used
 <b>Built with</b>
@@ -25,4 +27,6 @@ You can use the [Deploy-AzureResourceGroup](..\windows_based\Deploy-AzureResourc
 
 Or you can use our Azure Marketplace offer and configure your vsts agent via a user interface.
 
+
+***
 MIT © 2018 [white duck Gesellschaft für Softwareentwicklung GmbH](https://whiteducksoftware.com/)
