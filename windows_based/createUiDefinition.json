@@ -11,7 +11,7 @@
         "toolTip": "Chose an unique name which identifys your virtual machine.",
         "constraints": {
           "required": true,
-          "regex": "^[a-z][a-zA-Z0-9]{1,14}[a-zA-Z0-9]$",
+          "regex": "^[a-z][a-zA-Z0-9_-]{1,14}[a-zA-Z0-9_-]$",
           "validationMessage": "The value should not be empty has less then 16 characters. The VM name must contain only letters and numbers."
         },
         "visible": true
